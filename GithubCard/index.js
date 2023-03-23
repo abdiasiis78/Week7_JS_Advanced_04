@@ -2,7 +2,7 @@
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
-    https://api.github.com/users/<your name>
+    https://api.github.com/users/abdiasiis78
 */
 
 
@@ -38,7 +38,8 @@
 
 
 /*
-  STEP 4: Pass the data received from Github into your function, and append the returned markup to the DOM as a child of .cards
+  STEP 4: Pass the data received from Github into your function, and append the returned markup
+   to the DOM as a child of .cards
 */
 
 
@@ -48,8 +49,135 @@
     bottom of the page. Get at least 5 different Github usernames and add them as
     Individual strings to the friendsArray below.
 
-    Using that array, iterate over it, requesting data for each user, creating a new card for each user, and adding that card to the DOM.
+    Using that array, iterate over it, requesting data for each user, creating a new
+     card for each user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+// const followersArray = [];
+
+/*
+  STEP 3: Create a function that accepts a single object as its only argument.
+    Using DOM methods and properties, create and return the following markup:
+
+    <div class="card">
+      <img src={image url of user} />
+      <div class="card-info">
+        <h3 class="name">{users name}</h3>
+        <p class="username">{users user name}</p>
+        <p>Location: {users location}</p>
+        <p>Profile:
+          <a href={address to users github page}>{address to users github page}</a>
+        </p>
+        <p>Followers: {users followers count}</p>
+        <p>Following: {users following count}</p>
+        <p>Bio: {users bio}</p>
+      </div>
+    </div>
+// */
+
+
+
+
+
+function createCard(users) {
+  // Step 1
+  const card = document.createElement('div')
+  const img = document.createElement('img')
+  const cardInfo = document.createElement('div')
+  const names = document.createElement('h3')
+  const userName = document.createElement('p')
+  const location = document.createElement('p')
+  const profile = document.createElement('p')
+  const address = document.createElement('a')
+  const followers = document.createElement('p')
+  const following = document.createElement('p')
+  const bio = document.createElement('p')
+  
+// step .2
+
+ card.appendChild(img)
+ card.appendChild(cardInfo)
+ cardInfo.appendChild(names)
+ cardInfo.appendChild(userName)
+ cardInfo.appendChild(location)
+ cardInfo.appendChild(profile)
+ profile.appendChild(address)
+ cardInfo.appendChild(followers)
+ cardInfo.appendChild(following)
+ cardInfo.appendChild(bio)
+
+// step .3
+
+card.classList.add('card')
+cardInfo.classList.add('card-info')
+names.classList.add('name')
+userName.classList.add('username')
+
+// step .4
+
+img.src = users.avatar_url
+names.textContent = users.name
+userName.textContent = `Username: ${users.login}`
+address.textContent = users.html_url
+address.href = users.html_url
+location.textContent = `Location: ${users.location}`
+followers.textContent = `Followers: ${users.followers}`
+following.textContent = `following: ${users.following}`
+bio.textContent = `Bio ${users.bio}`
+return card
+}
+
+const cardsContainer = document.querySelector('.cards')
+
+
+axios.get('https://api.github.com/users/abdiasiis78')
+.then(repo => {
+  const user = repo.data;
+cardsContainer.appendChild(createCard(user))
+  
+}).catch(err => {
+  console.log(err);
+});
+
+axios.get('https://api.github.com/users/TaasCode')
+.then(repo => {
+  const user = repo.data;
+cardsContainer.appendChild(createCard(user))
+  
+}).catch(err => {
+  console.log(err);
+});
+
+
+axios.get('https://api.github.com/users/gabischool')
+.then(repo => {
+  const user = repo.data;
+cardsContainer.appendChild(createCard(user))
+  
+}).catch(err => {
+  console.log(err);
+});
+
+axios.get('https://api.github.com/users/duraanali')
+.then(repo => {
+  const user = repo.data;
+cardsContainer.appendChild(createCard(user))
+  
+}).catch(err => {
+  console.log(err);
+});
+
+axios.get('https://api.github.com/users/jonasschmedtmann')
+.then(repo => {
+  const user = repo.data;
+cardsContainer.appendChild(createCard(user))
+  
+}).catch(err => {
+  console.log(err);
+});
+
+
+
+
+
 
